@@ -1,3 +1,12 @@
-# AOC 21
+### Advent of Code
 
-Advent of Code (if time permits) :)
+As time permits :)
+
+*December 2021*
+
+| Sun               | Mon               | Tue | Wed               | Thur              | Fri               | Sat               |
+|-------------------|-------------------|-----|-------------------|-------------------|-------------------|-------------------|
+|                   |                   |     | [1](src/Day02.kt) | [2](src/Day02.kt) | [3](src/Day03.kt) | [4](src/Day04.kt) |
+| [5](src/Day05.kt) | [6](src/Day06.kt) | 7   | 8                 | 9                 | 10                | 11                |
+| 12                | 13                | 14  | 15                | 16                | 17                | 18                |
+| 19                | 20                | 21  | 22                | 23                | 24                | 25                |

@@ -1,7 +1,3 @@
-// 2 type aliases to save some typing
-typealias Point = Pair<Int, Int>
-typealias Grid = Array<IntArray>
-
 fun main() {
     val day = "Day09"
 
@@ -19,54 +15,54 @@ fun main() {
     }
 
     /**
-     * Find points adjacent to the given point on the grid.
+     * Find Cells adjacent to the given Cell on the grid.
      */
-    fun findAdjacentPoints(point: Point, grid: Grid): Map<Point, Int> {
-        return point.let { (r, c) ->
-            sequenceOf(Pair(r - 1, c), Pair(r, c - 1), Pair(r, c + 1), Pair(r + 1, c))
-                .filter { it.first in grid.indices && it.second in grid[0].indices }
-                .map { (row, col) -> Pair(Pair(row, col), grid[row][col]) }
+    fun findAdjacentCells(Cell: Cell, grid: Grid): Map<Cell, Int> {
+        return Cell.let { (r, c) ->
+            sequenceOf(Cell(r - 1, c), Cell(r, c - 1), Cell(r, c + 1), Cell(r + 1, c))
+                .filter { it.row in grid.indices && it.column in grid[0].indices }
+                .map { (row, col) -> Pair(Cell(row, col), grid[row][col]) }
                 .toMap()
         }
     }
 
     /**
-     * Find the low points on the grid.
+     * Find the low Cells on the grid.
      */
-    fun findLowPoints(grid: Grid): Map<Point, Int> {
-        val lowPoints = mutableMapOf<Point, Int>()
+    fun findLowCells(grid: Grid): Map<Cell, Int> {
+        val lowCells = mutableMapOf<Cell, Int>()
         for (row in grid.indices) {
             for (col in grid[row].indices) {
                 val height = grid[row][col]
-                if (findAdjacentPoints(Pair(row, col), grid).values.all { it > height }) {
-                    lowPoints[Pair(row, col)] = height
+                if (findAdjacentCells(Cell(row, col), grid).values.all { it > height }) {
+                    lowCells[Cell(row, col)] = height
                 }
             }
         }
-        return lowPoints
+        return lowCells
     }
 
     /**
-     * Find the size of basins for the low-points
+     * Find the size of basins for the low-Cells
      */
-    fun findBasins(grid: Grid): Map<Point, Int> {
-        val basin = mutableMapOf<Point, Int>()
-        for (point in findLowPoints(grid).keys) {
-            val queue = mutableListOf(point)
-            val explored = mutableSetOf<Point>()
+    fun findBasins(grid: Grid): Map<Cell, Int> {
+        val basin = mutableMapOf<Cell, Int>()
+        for (Cell in findLowCells(grid).keys) {
+            val queue = mutableListOf(Cell)
+            val explored = mutableSetOf<Cell>()
             while (queue.isNotEmpty()) { // BFS
                 val next = queue.removeFirst()
                 if (explored.add(next)) {
-                    queue.addAll(findAdjacentPoints(next, grid).filterValues { it != 9 }.keys)
+                    queue.addAll(findAdjacentCells(next, grid).filterValues { it != 9 }.keys)
                 }
             }
-            basin[point] = explored.size
+            basin[Cell] = explored.size
         }
         return basin
     }
 
     fun part1(input: List<String>): Int {
-        return findLowPoints(readGrid(input)).values.sumOf { it + 1 }
+        return findLowCells(readGrid(input)).values.sumOf { it + 1 }
     }
 
     fun part2(input: List<String>): Int {

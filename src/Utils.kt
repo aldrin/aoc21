@@ -35,3 +35,16 @@ fun Grid.print() {
     }
     println()
 }
+
+/**
+ * Read a grid of numbers
+ */
+fun readGrid(input: List<String>): Grid {
+    val grid = Array(input.size) { IntArray(input[0].length) { 0 } }
+    for (r in input.indices) {
+        for (c in input[r].indices) {
+            grid[r][c] = input[r][c].digitToInt()
+        }
+    }
+    return grid
+}

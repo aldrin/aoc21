@@ -23,3 +23,4 @@ Kotlin solutions to https://adventofcode.com/2021/
 [12]: src/Day12.kt
 [13]: src/Day13.kt
 [14]: src/Day14.kt
+[15]: src/Day15.kt
